@@ -17,7 +17,7 @@ print(img.shape)
 @numba.jit(nopython=True)
 def imgtocomp(new, a, b):
     def func(z):
-        return z**(2)
+        return np.log(z)
     center = [a, b]
     a = len(img)
     b = len(img[0])
