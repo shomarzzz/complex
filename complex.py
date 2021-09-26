@@ -22,7 +22,7 @@ class ComplexImage:
         self.imgtocomp()
         self.input = function(self.input)
         
-    def new(self, comp, new, cent, dr, di, output_size):
+    def new(self, new, cent, dr, di, output_size):
         self.output_img = np.ones((output_size[0], output_size[1], self.img.shape[2]), dtype=np.uint8)*0
         self.out_img = self.comptoimg(self.img, self.input, output_img, output_size, dr, di)
         
