@@ -4,7 +4,7 @@ import numpy as np
 from numba import jit
 
 class ComplexImage:
-    def __init__(self, function, IMG_PATH:str, OUTPUT_SIZE:tuple, CENTRE_INPUT:tuple, OUTPUT_CENTRE:tuple, dr_di_input, dr_di_output=None) -> None:
+    def __init__(self, function, IMG_PATH:str, CENTRE_INPUT:tuple, dr_di_input) -> None:
         self.function = function
         self.img = mpimg.imread(IMG_PATH)
         self.output_size = OUTPUT_SIZE
@@ -21,9 +21,11 @@ class ComplexImage:
         self.input = np.zeros((len(self.img), len(self.img[0])), dtype=complex)
         self.imgtocomp()
         self.input = function(self.input)
-        self.output_img = np.ones((self.output_size[0], self.output_size[1], self.img.shape[2]), dtype=np.uint8)*0
-        self.output_img = self.comptoimg(self.img, self.input, self.output_img, self.centreO, self.dro, self.dio)
-
+        
+    def new(self, comp, new, cent, dr, di, output_size):
+        self.output_img = np.ones((output_size[0], output_size[1], self.img.shape[2]), dtype=np.uint8)*0
+        self.out_img = self.comptoimg(self.img, self.input, output_img, output_size, dr, di)
+        
     def imgtocomp(self):
         dr = self.dri
         di = self.dii
